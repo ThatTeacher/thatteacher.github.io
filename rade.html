@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=Arizonia&family=Courgette&family=Damion&family=Mr+Dafoe&family=Niconne&family=Tourney:wght@100&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="rade.css">
+    <script>
+        let shakeAmount = 0
+        let shakeDirection = 1
+
+        window.onload = () => {
+            setTimeout(()=>{
+                init()
+            }, 10000)
+            // openPack()
+        }
+
+
+
+        let interval
+        let progress = 0.1
+
+        function init(){
+            document.querySelector("#the-light").style.display = "block"
+            document.querySelector("#the-light").style.animation = "fadeIn 2s ease forwards"
+
+            document.querySelector("#move-button").style.display = "block"
+            document.querySelector("#move-button").style.opacity = "0"
+            document.querySelector("#move-button").style.animation = "fadeIn 2s ease 4.5s forwards"
+
+
+            document.querySelector("#the-light").style.setProperty("--p", progress * 100 + "%")
+            document.querySelector("#the-light").style.setProperty("--d", (progress - 0.1) * 100 + "%")
+    
+            let msg = document.getElementById("message")
+            msg.style.animation = "fadeOut 2s ease 6s forwards"
+
+            let count = 0
+            let messages = ["walk then  ","can you see the light?             "]
+            msg.innerText = ""
+            let message = ""
+            let val = ""
+
+            let txtInterval = 
+            setInterval(() => {
+                let char = message.charAt(count)
+                if(char === " "){
+                    char = " "
+                }
+                val += char 
+                msg.innerText = val
+                if(count++ === message.length){
+                    count = 0
+                    val = ""
+                    if(messages.length > 0){
+                        message = messages.pop()
+                    }else{
+                        clearInterval(txtInterval)
+                    }
+                }
+
+            }, 100);
+
+    
+            document.getElementById("move-button").ontouchstart = () => {
+                interval = setInterval(() => {
+                    shouldRun()
+                }, 10)
+            }
+            document.getElementById("move-button").ontouchcancel = () => {
+                shouldStopRunning()
+            }
+            document.getElementById("move-button").ontouchend = () => {
+                shouldStopRunning()
+            }
+        }
+
+
+        function shouldRun() {
+            if (progress < 0.3) {
+                console.log("should progress")
+                progress = Math.min(1, progress + 0.0005)
+                document.querySelector("#the-light").style.transform = `scale(${Math.min(1, progress)}) translateY(calc(var(--t) * 2vw))`
+                document.querySelector("#the-light").style.setProperty("--p", (progress) * 150 + "%")
+                document.querySelector("#the-light").style.setProperty("--d", (progress - 0.1) * 50 + "%")
+                runShake()
+            } else {
+                shouldStopRunning()
+                removeMoveItButton()
+                revealTheLight()
+            }
+            /* runShake() */
+        }
+
+        function runShake() {
+            if (interval) {
+                //running
+                shakeAmount += 0.05 * shakeDirection
+                if (shakeAmount >= 1) {
+                    shakeAmount = 1
+                    shakeDirection = -1
+                } else if (shakeAmount <= 0) {
+                    shakeAmount = 0
+                    shakeDirection = 1
+                }
+                document.querySelector("#the-light").style.setProperty("--t", shakeAmount)
+            } else {
+                //revert
+            }
+            /*
+                if(at limit) revert
+                else 
+            */
+        }
+
+        function removeMoveItButton() {
+            document.getElementById("move-button").style.animation = "moveItExplode 1s linear forwards"
+            document.querySelector("#move-button path:nth-child(2)").style.setProperty("fill", "black")
+            setTimeout(() => {
+                document.getElementById("move-button").remove()
+            }, 2000)
+        }
+
+        function shouldStopRunning() {
+            if (interval) {
+                clearInterval(interval)
+            }
+        }
+
+        function revealTheLight() {
+            document.querySelector("#the-light").style.animation = "revealTheLight 8s ease forwards"
+            // setTimeout(() => {
+            document.getElementById("just").style.display = 'block'
+            document.getElementById("rad").style.animation = "radAppear 8s ease-in forwards"
+            // }, 1000);
+            document.getElementById("rad").addEventListener("click", openPack)
+            // openPack()
+        }
+
+        function openPack() {
+            document.getElementById("rad").removeEventListener("click", openPack)
+            document.getElementById("rad").style.animation = "fadeOut 2s ease-in forwards"
+            document.getElementById("explosion").style.display = "block"
+            document.getElementById("explosion-background").style.display = "block"
+            setTimeout(() => {
+                document.getElementById("explosion").style.display = "none"
+                document.getElementById("explosion-background").style.display = "none"
+                
+            }, 8000);
+        }
+    </script>
+
+    <style>
+
+
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div style="display: block">
+            <div class="line inf mr-io a-2" style="animation-iteration-count: 2; --y: 10;"></div>
+            <div class="line inf mr-io a-2" style="animation-iteration-count: 2; animation-delay: 0.2s; --y: 20;"></div>
+            <div class="line inf ml-io a-2" style="animation-iteration-count: 2; animation-delay: 0.3s; --y: 30;"></div>
+            <div class="line inf mr-io a-2" style="animation-iteration-count: 2; animation-delay: 1.2s; --y: 40;"></div>
+            <div class="line inf mr-io a-2" style="animation-iteration-count: 2; animation-delay: 3.5s; --y: 50;"></div>
+            <div class="line inf ml-io a-2" style="animation-iteration-count: 2; animation-delay: 2.4s; --y: 60;"></div>
+            <div class="line inf mr-io a-2" style="animation-iteration-count: 2; animation-delay: 1.9s; --y: 70;"></div>
+            <div class="line inf ml-io a-2" style="animation-iteration-count: 2; animation-delay: 2.1s; --y: 80;"></div>
+            <div class="line inf mr-io a-2" style="animation-iteration-count: 2; animation-delay: 1.6s; --y: 90;"></div>
+    
+            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 0.2s; --x: 20;"></div>
+            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 0.7s; --x: 30;"></div>
+            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 1.2s; --x: 40;"></div>
+            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 3.5s; --x: 50;"></div>
+            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 2.4s; --x: 60;"></div>
+            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 1.9s; --x: 70;"></div>
+            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 2.1s; --x: 80;"></div>
+            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 1.6s; --x: 90;"></div>
+        </div>
+
+
+
+        <div style="display: block; position: absolute; top: 0; left: 10vw; clip-path: url(#clip); transform: scale(1); width: 80vw; height:150vw; transform-origin: top center; background: rgb(32, 32, 32); opacity: 0.7">
+
+            <div class="f7 wi t-m lb fade-io a-4" style="animation-delay: 0s; --x: 25; --y: 20">Rad</div>
+            <div class="f7 wi t-m lb fade-io a-4" style="animation-delay: 0.15s; --x: 45; --y: 30">Rad</div>
+            <div class="f7 wi t-m lb fade-io a-4" style="animation-delay: 0.25s; --x: 65; --y: 40">Rad</div>
+
+            <div class="f7 wi t-m lb fade-io a-4" style="animation-delay: 0.75s; --x: 65; --y: 20">Rad</div>
+            <div class="f7 wi t-m lb fade-io a-4" style="animation-delay: 1s; --x: 45; --y: 30">Rad</div>
+            <div class="f7 wi t-m lb fade-io a-4" style="animation-delay: 1.15s; --x: 25; --y: 40">Rad</div>
+
+            <div class="f2 wi t-m lb fade-io a-4" style="animation-delay: 1.45s; --x: 65; --y: 20">Rad</div>
+            <div class="f7 wi t-m lb fade-io a-4" style="animation-delay: 1.6; --x: 45; --y: 30">Rad</div>
+            <div class="f2 wi t-m lb fade-io a-4" style="animation-delay: 1.75s; --x: 25; --y: 40">Rad</div>
+
+            <div class="f4 wi t-m lb fade-io a-4" style="animation-delay: 2s; --x: 45; --y: 20">Rad</div>
+            <div class="f4 wi t-m lb fade-io a-4" style="animation-delay: 2.15s; --x: 45; --y: 30">Rad</div>
+            <div class="f4 wi t-m lb fade-io a-4" style="animation-delay: 2.3s; --x: 45; --y: 40">Rad</div>
+
+            <div class="f3 wi t-m lb fade-io a-4" style="animation-delay: 2.5s; --x: 45; --y: 40">Rad</div>
+            <div class="f3 wi t-m lb fade-io a-4" style="animation-delay: 2.65s; --x: 45; --y: 30">Rad</div>
+            <div class="f3 wi t-m lb fade-io a-4" style="animation-delay: 2.8s; --x: 45; --y: 20">Rad</div>
+
+            <div class="f7 wi t-l lb fade-io a-4" style="animation-delay: 3.6s; --x: 40; --y: 20">Rad</div>
+            <div class="f7 wi t-l lb fade-io a-4" style="animation-delay: 3.75s; --x: 40; --y: 35">Rad</div>
+            <div class="f7 wi t-l lb fade-io a-4" style="animation-delay: 3.9s; --x: 40; --y: 50">Rad</div>
+
+            <div class="f3 wi t-l lb fade-io a-4" style="animation-delay: 4.15s; --x: 10; --y: 35">Rad</div>
+            <div class="f3 wi t-l lb fade-io a-4" style="animation-delay: 4.35s; --x: 40; --y: 35">Rad</div>
+            <div class="f3 wi t-l lb fade-io a-4" style="animation-delay: 4.5s; --x: 70; --y: 35">Rad</div>
+
+            <div class="b" style="animation: scale2RightIO 2s ease 5s; transform: scaleX(0);"></div>
+            <div class="b" style="animation: scale2TopIO 2s ease 5s; transform: scaleX(0); top: 20vh"></div>
+
+            <div
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0, 0, 0, 0.507), rgba(0, 0, 0, 0.293), #00000078, rgba(0, 0, 0, 0.592)), linear-gradient(90deg, rgba(0, 0, 0, 0.226), rgba(255, 0, 0, 0) 30%, transparent, rgba(0, 0, 0, 0.216))">
+            </div>
+
+        </div>
+
+        <img src="yellow.png"
+            style="animation: fadeScaleIO 5s ease 6s; opacity: 0; position: absolute; top: calc(50vh - 7.5vw); left: 42.5vw; width: 15vw; filter: brightness(85%) hue-rotate(-5deg) grayscale(30%)">
+
+        <div id="rad-container" style="display: none;">
+            <div>
+            </div>
+        </div>
+
+        <!-- <div class="b" style="animation: scale2RightIO 2s ease-in-out forwards; mix-blend-mode: color-dodge;"></div>
+        <div class="b" style="animation: scale2RightIO 2s ease-in-out forwards; mix-blend-mode: color-dodge; top: 50vh"></div>
+        <div class="b" style="animation: scale2RightIO 2s ease-in-out forwards; mix-blend-mode: color-dodge; top: 70vh"></div> -->
+
+        <div id="message" class="f4 wi www t-s lbb" style="--y: 20;"></div>
+
+        <!-- <div id="message" class="lbb f4 wi t-s" style="">can you see the light?</div> -->
+
+        <div id="the-light" class="the-light" style="display: none;">
+
+        </div>
+
+        <div id="just" class="www lbb wi" style="display: none; --y: 35; mix-blend-mode: difference; animation: fadeIO 4s ease 6s forwards; opacity: 0;">JUST DO IT</div>
+
+        <div id="rad"></div>
+        <div id="real-rad"></div>
+        <div id="explosion-background"></div>
+        <img id="explosion" src="damm3.gif" alt="">
+        <div id="real-rad"></div>
+
+        <div id="move-button" style="display: none">
+            <svg viewBox="0 0 100 100" style="overflow: inherit; width: 100%; background: none">
+                <!-- <path d="M15,99 L38,40 L20,40 L50,15 L80,40 L63,40 L85,99 Z" fill="black" stroke-lineJoin="round" stroke="black" stroke-width="1"></path> -->
+                <path transform="translate(0, 10)" d="M15,99 L38,40 L20,40 L50,15 L80,40 L63,40 L85,99 Z"
+                    fill="rgba(255, 255, 255, 0.5)" stroke-lineJoin="round" stroke="rgba(255, 255, 255, 0.5)"
+                    stroke-width="0">
+                    <animate attributeName="opacity" values="0;0.2;1;1;0.5;0" dur="2s" repeatCount="indefinite">
+                    </animate>
+                    <animateTransform attributeName="transform" attributeType="xml" type="translate"
+                        values="-10 50; 0 0" dur="2s" repeatCount="indefinite"></animateTransform>
+                    <animateTransform attributeName="transform" attributeType="xml" type="scale" additive="sum"
+                        values="1.2; 1" dur="2s" repeatCount="indefinite"></animateTransform>
+                </path>
+                <path transform="translate(0, 10)" d="M15,99 L38,40 L20,40 L50,15 L80,40 L63,40 L85,99 Z"
+                    fill="rgba(255, 255, 255, 0.5)" stroke-lineJoin="round" stroke="rgba(255, 255, 255, 0.5)"
+                    stroke-width="0">
+                    <animate attributeName="opacity" delay="1s" values="0;0;0.2;1;1;0.5;0" dur="2s"
+                        repeatCount="indefinite"></animate>
+                    <animateTransform attributeName="transform" attributeType="xml" type="translate"
+                        values="-10 50; 0 0" dur="2s" repeatCount="indefinite"></animateTransform>
+                    <animateTransform attributeName="transform" attributeType="xml" type="scale" additive="sum"
+                        values="1.2; 1" dur="2s" repeatCount="indefinite"></animateTransform>
+                </path>
+            </svg>
+        </div>
+
+    </div>
+    <svg viewBox="0 0 100 100" style="position: absolute; left: 0; width: 0vw;">
+        <clipPath id="clip" transform="translate(8,0) scale(0.01, 0.007)" clipPathUnits="objectBoundingBox">
+            <path d="M0,21 l11,0 v57 h-11 z" fill="black" stroke-width="0" stroke="green"></path>
+            <path
+                d="M11,21 l8,0 c12,1 10,27 3,27 c2,0 4.5,3 4.5,6 v24 h-11 v-24 c-1,-2.5 -4.5,-2 -4.5,-2 v-10 l3.5,0 c2.5,-1 2.5,-9 0,-10 h-3.5 z"
+                fill="black" stroke-width="0" stroke="green"></path>
+
+            <path d="M31,44 l11,0 v-4 c0,-3 5,-3 5,0 v38 l12,0 v-39 c0,-13 -31,-16 -28,5" fill="black" stroke-width="0"
+                stroke="green"></path>
+            <path d="M47,47 l0,6.5 q-3,0 -5,3 q-1,5 0,10 q2,5 5,1 l0,6.5 c-4,8 -16.8,6 -16.8,-8 s5,-16 17,-19"
+                fill="black" stroke-width="0" stroke="green"></path>
+
+            <path d="M80,21 v57 h12 v-57 z" fill="black" stroke-width="0" stroke="green"></path>
+            <path d="M80,34 v6 q-4,-4 -5,1 v26 q4,4 5,1 v6 c-5,8 -16.5,5 -16.5,-6 v-26 c0,-20 16.5,-11 16.5,-8"
+                fill="black" stroke-width="0" stroke="green"></path>
+        </clipPath>
+        <!-- <path d="M0,21 l18,0 c14,1 10,28 4,27 l5,7 l0,23.5 l-11.5,0 l0,-24 l-4.5,-2.5 l0,26.5 l-11.5,0 Z 
+                     M11,31.5 l3.5,0 c2.5,1 2.5,10 0,11 l-3.5,0 z" fill="none" stroke-width="0.1" stroke="blue"></path> -->
+    </svg>
+</body>
+
+</html>
