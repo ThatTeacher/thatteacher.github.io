@@ -509,6 +509,7 @@ body {
 }
 
 #rad {
+    touch-action: manipulation;
     position: absolute;
     mix-blend-mode: multiply;
     opacity: 0;
@@ -592,5 +593,6 @@ body {
 }
 
 #move-button{
+        touch-action: manipulation;
     overflow: visible; background: none; position: fixed; bottom: 10vw; left: calc(50vw - var(--r)/2); --r: 20vw; width: var(--r); height: var(--r);
 }
