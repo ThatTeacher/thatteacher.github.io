@@ -11,24 +11,34 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Anton&family=Arizonia&family=Courgette&family=Damion&family=Mr+Dafoe&family=Niconne&family=Tourney:wght@100&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/rade.css">
+    <link rel="stylesheet" href="rade.css">
     <script>
         let shakeAmount = 0
         let shakeDirection = 1
 
         window.onload = () => {
-            setTimeout(()=>{
+            // if(window.navigator.userAgent.matchAll(/Apple/g)){
+            //     alert(window.navigator.userAgent)
+            // }else{
+            //     alert(window.navigator.userAgent)
+            // }
+            setTimeout(() => {
                 init()
             }, 10000)
             // openPack()
+
+            // document.querySelector("#the-light").style.display = "block"
+            // revealTheLight()
         }
 
-
+        window.ontouchstart = (e) => {
+            e.preventDefault()
+        }
 
         let interval
         let progress = 0.1
 
-        function init(){
+        function init() {
             document.querySelector("#the-light").style.display = "block"
             document.querySelector("#the-light").style.animation = "fadeIn 2s ease forwards"
 
@@ -39,37 +49,37 @@
 
             document.querySelector("#the-light").style.setProperty("--p", progress * 100 + "%")
             document.querySelector("#the-light").style.setProperty("--d", (progress - 0.1) * 100 + "%")
-    
+
             let msg = document.getElementById("message")
             msg.style.animation = "fadeOut 2s ease 6s forwards"
 
             let count = 0
-            let messages = ["walk then  ","can you see the light?             "]
+            let messages = ["walk then  ", "can you see the light?             "]
             msg.innerText = ""
             let message = ""
             let val = ""
 
-            let txtInterval = 
-            setInterval(() => {
-                let char = message.charAt(count)
-                if(char === " "){
-                    char = " "
-                }
-                val += char 
-                msg.innerText = val
-                if(count++ === message.length){
-                    count = 0
-                    val = ""
-                    if(messages.length > 0){
-                        message = messages.pop()
-                    }else{
-                        clearInterval(txtInterval)
+            let txtInterval =
+                setInterval(() => {
+                    let char = message.charAt(count)
+                    if (char === " ") {
+                        char = " "
                     }
-                }
+                    val += char
+                    msg.innerText = val
+                    if (count++ === message.length) {
+                        count = 0
+                        val = ""
+                        if (messages.length > 0) {
+                            message = messages.pop()
+                        } else {
+                            clearInterval(txtInterval)
+                        }
+                    }
 
-            }, 100);
+                }, 100);
 
-    
+
             document.getElementById("move-button").ontouchstart = () => {
                 interval = setInterval(() => {
                     shouldRun()
@@ -135,14 +145,46 @@
             }
         }
 
+        function updatePD(p, d) {
+            document.querySelector("#the-light").style.setProperty("--p", p + '%')
+            document.querySelector("#the-light").style.setProperty("--d", d + '%')
+        }
+
         function revealTheLight() {
-            document.querySelector("#the-light").style.animation = "revealTheLight 8s ease forwards"
+            let cc = 0
+            let p = 45
+            let d = 10
+            let dx = 0
+            updatePD(p, d)
+
+            //8s => 8000ms | 8s * 30% => 80 * 30 = 2400
+            let inte = setInterval(() => {
+                console.log("counter: " + cc)
+                if (++cc < 240) {
+                    let pr = (cc) / 40
+                    p += 1 / 240 * 25
+                    updatePD(p, d)
+
+                } else if (cc > 240 && cc < 800) {
+                    let pr = (cc - 240) / 560
+                    console.log("pr: " + pr)
+                    dx += 8 / 560
+                    p += 1 / 560 * 30 * dx
+                    d += 1 / 560 * 90 * dx
+                    updatePD(p, d)
+                } else if (cc >= 800) {
+                    clearInterval(inte)
+                }
+            }, 10);
+            document.querySelector("#the-light").style.animation = "scaleUp 3s ease forwards"
+            // document.querySelector("#the-light").style.animation = "revealTheLight 8s ease forwards"
             // setTimeout(() => {
             document.getElementById("just").style.display = 'block'
             document.getElementById("rad").style.animation = "radAppear 8s ease-in forwards"
             // }, 1000);
             document.getElementById("rad").addEventListener("click", openPack)
             // openPack()
+
         }
 
         function openPack() {
@@ -153,8 +195,12 @@
             setTimeout(() => {
                 document.getElementById("explosion").style.display = "none"
                 document.getElementById("explosion-background").style.display = "none"
-                
+                gayRadAppear()
             }, 8000);
+        }
+
+        function gayRadAppear() {
+            document.querySelector("#rad-is-gay").style.display = 'block'
         }
     </script>
 
@@ -176,20 +222,29 @@
             <div class="line inf mr-io a-2" style="animation-iteration-count: 2; animation-delay: 1.9s; --y: 70;"></div>
             <div class="line inf ml-io a-2" style="animation-iteration-count: 2; animation-delay: 2.1s; --y: 80;"></div>
             <div class="line inf mr-io a-2" style="animation-iteration-count: 2; animation-delay: 1.6s; --y: 90;"></div>
-    
-            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 0.2s; --x: 20;"></div>
-            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 0.7s; --x: 30;"></div>
-            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 1.2s; --x: 40;"></div>
-            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 3.5s; --x: 50;"></div>
-            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 2.4s; --x: 60;"></div>
-            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 1.9s; --x: 70;"></div>
-            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 2.1s; --x: 80;"></div>
-            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 1.6s; --x: 90;"></div>
+
+            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 0.2s; --x: 20;">
+            </div>
+            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 0.7s; --x: 30;">
+            </div>
+            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 1.2s; --x: 40;">
+            </div>
+            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 3.5s; --x: 50;">
+            </div>
+            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 2.4s; --x: 60;">
+            </div>
+            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 1.9s; --x: 70;">
+            </div>
+            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 2.1s; --x: 80;">
+            </div>
+            <div class="line-y inf mb-io a-2" style="animation-iteration-count: 2; animation-delay: 1.6s; --x: 90;">
+            </div>
         </div>
 
 
 
-        <div style="display: block; position: absolute; top: 0; left: 10vw; clip-path: url(#clip); transform: scale(1); width: 80vw; height:150vw; transform-origin: top center; background: rgb(32, 32, 32); opacity: 0.7">
+        <div
+            style="display: block; position: absolute; top: 0; left: 10vw; clip-path: url(#clip); transform: scale(1); width: 80vw; height:150vw; transform-origin: top center; background: rgba(32, 32, 32, 0.133); opacity: 0.7">
 
             <div class="f7 wi t-m lb fade-io a-4" style="animation-delay: 0s; --x: 25; --y: 20">Rad</div>
             <div class="f7 wi t-m lb fade-io a-4" style="animation-delay: 0.15s; --x: 45; --y: 30">Rad</div>
@@ -236,6 +291,7 @@
             </div>
         </div>
 
+
         <!-- <div class="b" style="animation: scale2RightIO 2s ease-in-out forwards; mix-blend-mode: color-dodge;"></div>
         <div class="b" style="animation: scale2RightIO 2s ease-in-out forwards; mix-blend-mode: color-dodge; top: 50vh"></div>
         <div class="b" style="animation: scale2RightIO 2s ease-in-out forwards; mix-blend-mode: color-dodge; top: 70vh"></div> -->
@@ -248,10 +304,36 @@
 
         </div>
 
-        <div id="just" class="www lbb wi" style="display: none; --y: 35; mix-blend-mode: difference; animation: fadeIO 4s ease 6s forwards; opacity: 0;">JUST DO IT</div>
+        <div id="just" class="www lbb wi"
+            style="display: none; --y: 35; mix-blend-mode: difference; animation: fadeIO 4s ease 6s forwards; opacity: 0;">
+            JUST DO IT</div>
+
+        <div id="rad-is-gay" style="display: none">
+            <div class="rad-colors">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <img id="real-rad" src="rad.png" style="display: block">
+            <img src="confetti.gif" alt=""
+                style="position: absolute; top: 20vh; left: 0; width: 100vw; mix-blend-mode: multiply; opacity: 0.3;">
+            <svg viewBox="0 0 100 100" style="animation: fadeIn 2s ease forwards; opacity: 0; position: absolute; width: 80vw; left:10vw; top: 20vh;">
+                <path id="b-path" d="M10,50 C20,15 80,15 90,50" stroke="none" fill="none"></path>
+                <text textLength="60" style="font-size: 1.5vh; text-align: center;" x="20" text-anchor="">
+                    <textPath href="#b-path">
+                        Happy Birthday
+                    </textPath>
+                </text>
+            </svg>
+            <div id="nigger" class="t-s lb" style="animation: fadeIn 0s ease 1s forwards; opacity: 0; width: 100%; text-align: center; --y: 35;">I guess..</div>
+    
+        </div>
 
         <div id="rad"></div>
-        <div id="real-rad"></div>
+
+
         <div id="explosion-background"></div>
         <img id="explosion" src="damm3.gif" alt="">
         <div id="real-rad"></div>
