@@ -426,7 +426,8 @@ body {
 
 @keyframes scaleUp{
     to{
-        transform: scale(1)
+        transform: scale(1);
+        -webkit-transform: scale(1)
     }
 }
 
