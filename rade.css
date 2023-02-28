@@ -534,10 +534,9 @@ body {
 #real-rad{
     /* display: none; */
     position: absolute;
-    --w: 10vw;
-    top: calc(50vh - var(--w));
-    left: calc(50vw - var(--w));
-    width: calc(var(--w) * 2);
+    top: calc(50vh - 8vw);
+    left: calc(50vw - 8vw);
+    width: calc(16vw);
     animation: realRadAppear 6s ease-out forwards;
     mix-blend-mode: multiply;
 }
