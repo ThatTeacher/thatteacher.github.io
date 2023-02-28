@@ -515,7 +515,7 @@ body {
     left: 40vw;
     width: 20vw;
     height: 20vw;
-    background-image: url('pack.png');
+    background-image: url('/pack.png');
     background-repeat: no-repeat;
     background-size: 100%;
     transform: scale(0.8);
