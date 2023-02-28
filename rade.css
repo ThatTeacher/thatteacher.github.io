@@ -7,9 +7,9 @@
     font-family: 'Arizonia', cursive;
     font-family: 'Tourney', cursive;
     font-family: 'Anton', sans-serif;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-user-drag: none;
+    user-select: none!important;
+    -webkit-user-select: none!important;
+    -webkit-user-drag: none!important;
 }
 
 .f1{
