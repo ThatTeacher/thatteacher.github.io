@@ -1,0 +1,513 @@
+
+* {
+    font-family: 'Niconne', cursive;
+    font-family: 'Mr Dafoe', cursive;
+    font-family: 'Damion', cursive;
+    font-family: 'Courgette', cursive;
+    font-family: 'Arizonia', cursive;
+    font-family: 'Tourney', cursive;
+    font-family: 'Anton', sans-serif;
+}
+
+.f1{
+        
+    font-family: 'Niconne', cursive;
+}
+.f2{
+    font-family: 'Mr Dafoe', cursive;
+}
+.f3{
+    font-family: 'Damion', cursive;
+}
+.f4{
+    font-family: 'Courgette', cursive;
+}
+.f5{
+    font-family: 'Arizonia', cursive;
+}
+.f6{
+    font-family: 'Tourney', cursive;
+}
+.f7{
+    font-family: 'Anton', sans-serif;
+}
+
+.lb{
+    position: absolute;
+    --x: 0;
+    --y: 0;
+    left: calc(var(--x) * 1vw);
+    top: calc(var(--y) * 1vh);
+}
+
+.lbb{
+    position: absolute;
+    --x: 0;
+    --y: 0;
+    left: calc(var(--x) * 1vw);
+    bottom: calc(var(--y) * 1vh);
+}
+
+.www{
+    width: 100%;
+    text-align: center;
+}
+
+.www::after{
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, black 0%, transparent, black 90%);
+}
+
+.wi{
+    color: white;
+}
+
+.wia{
+    color:#ffffffc5;
+}
+
+.t-s{
+    font-size: 5vw;
+}
+.t-m{
+    font-size: 10vw;
+}
+.t-l{
+    font-size: 15vw;
+}
+
+.line{
+    position: absolute;
+    --y: 0;
+    top: calc(var(--y) * 1vh);
+    width: 100%;
+    height: 4px;
+    background: #ff002f26;
+    background: #fdfdfd78;
+}
+
+.line-y{
+    position: absolute;
+    --x: 0;
+    top: 0;
+    left: calc(var(--x) * 1vw);
+    width: 4px;
+    height: 100%;
+    background: #ff002f26;
+    background: #fdfdfd42;
+
+}
+
+.b{
+    position: absolute;
+    top: 30vh;
+    width: 100%;
+    height: 20vh;
+    background: rgba(251, 251, 251, 0.355);
+}
+
+.g{
+    position: absolute;
+    top: 30vh;
+    width: 100%;
+    height: 20vh;
+    background: rgba(251, 251, 251, 0.355);
+}
+
+html,
+body {
+    margin: 0;
+    background: rgb(0, 0, 0);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: inherit;
+}
+
+.slide-right-io{
+    opacity: 0;
+    animation: slideRightIO 1s linear forwards;
+}
+
+.fade-io{
+    opacity: 0;
+    animation: fadeIO 1s ease forwards;
+}
+
+.a-4{
+    animation-duration: 1s;
+}
+
+.a-5{
+    animation-duration: 1s!important;
+}
+
+.a-2{
+    animation-duration: 4s!important;
+}
+
+.mr-io{
+    transform: translateX(-100%);
+    animation: moveRightIO 1s ease forwards;
+}
+.ml-io{
+    transform: translateX(100%);
+    animation: moveLeftIO 1s ease forwards;
+}
+.mb-io{
+    transform: translateY(-100%);
+    animation: moveBottomIO 1s ease forwards;
+}
+
+.inf{
+    animation-iteration-count: infinite;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut{
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}
+
+@keyframes fadeScaleIO{
+    0%{
+        opacity: 0;
+    }
+    30%, 50%{
+        opacity: 1;
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(0.8) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+@keyframes scale2TopIO{
+    0%{
+        transform-origin: bottom;
+        transform: scaleY(0);
+    }
+    50%{
+        transform-origin: bottom;
+        transform: scaleY(1);
+    }
+    50.01%{
+        transform-origin: top;
+        transfrom: scale(1);
+    }
+    100%{
+        transform-origin: top;
+        transform: scaleY(0);
+    }
+}
+
+@keyframes scale2RightIO{
+    0%{
+        transform-origin: left;
+        transform: scaleX(0);
+    }
+    50%{
+        transform-origin: left;
+        transform: scaleX(1);
+    }
+    50.01%{
+        transform-origin: right;
+        transfrom: scaleX(1);
+    }
+    100%{
+        transform-origin: right;
+        transform: scaleX(0);
+    }
+}
+
+@keyframes moveBottomIO{
+    0%{
+        transform: translateY(-100%);
+    }
+    100%{
+        transform: translateY(100%);
+    }
+}
+
+@keyframes moveRightIO{
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(100%);
+    }
+}
+
+@keyframes moveLeftIO{
+    0%{
+        transform: translateX(100%);
+    }
+    100%{
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes fadeIO{
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+@keyframes slideRightIO{
+    0%{
+        opacity: 0;
+        transform: translateX(0vw);
+    }
+    50%,70%{
+        opacity: 1;
+    }
+    100%{
+        transform: translateX(10vw);
+        opacity: 0;
+    }
+
+}
+
+@keyframes rade_frame {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(0.25);
+    }
+}
+
+@keyframes phase1 {
+    from {
+        transform: translate(-100%, 0);
+    }
+
+    to {
+        transform: translate(100%, 0);
+    }
+}
+
+@keyframes phase2 {
+    from {
+        transform: translate(0%, -100%);
+    }
+
+    to {
+        transform: translate(0%, 100%);
+    }
+}
+
+/* @keyframes phase3 {
+    from {
+        transform: rotate(30deg) translate(0%, -100%);
+    }
+
+    to {
+        transform: rotate(30deg) translate(0%, 100%);
+    }
+} */
+
+#rad-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vw;
+    background: linear-gradient(30deg, #111, #000, #111);
+    clip-path: url(#clip);
+    /* animation: rade_frame 8s linear forwards; */
+}
+
+#rad-container>div:nth-child(1) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    --p: 0%;
+    background: linear-gradient(rgb(27, 27, 27), rgba(183, 183, 183, 0.339), rgb(41, 41, 41) 80%);
+    /* background: linear-gradient(0deg, #11111104 var(--p), rgba(122, 2, 2, 0.196), #05050500); */
+    /* transform: translateX(-100%); */
+    /* animation: phase1 2s ease 2s, phase2 2s ease 4s forwards, phase3 2s ease 6s; */
+    transform-origin: center;
+    /* animation: ch 4s ease; */
+}
+
+@property --p {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: 0%;
+}
+
+@property --d {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: 0%;
+}
+
+@keyframes ch {
+    0% {
+        transform: scale(0.1);
+        --p: 0%;
+        --d: 0%
+    }
+
+    50% {
+        --d: 0%;
+    }
+
+    100% {
+        transform: scale(1);
+        --p: 100%;
+        --d: 100%;
+    }
+}
+
+@keyframes revealTheLight {
+    30% {
+        --p: 70%;
+        transform: scale(1);
+        --d: 10%;
+    }
+
+    100% {
+        transform: scale(1);
+        --p: 100%;
+        --d: 100%;
+    }
+}
+
+@keyframes moveItExplode {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        /* transform: scale(0.1) rotate(720deg) translate(0 -20vh); */
+        opacity: 0;
+    }
+}
+
+@keyframes radAppear{
+    to{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes explosionOccur{
+    0%,30%{
+        opacity: 0;
+    }
+    60%, 80%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+@keyframes explosionBackground{
+    0%{
+        opacity: 0;
+    }
+    30%{
+        opacity: 1;
+    }
+    80%, 100%{
+        opacity: 0;
+    }
+}
+
+#explosion{
+    display: none;
+    position: absolute;
+    /* mix-blend-mode: color-burn; */
+    top: 0;
+    left: 0;
+    width: auto;
+    left: calc(100vw - 100vh);
+    height: 100vh;
+    animation: explosionOccur 8s ease-in forwards;
+}
+
+#explosion-background{
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    animation: explosionBackground 8s ease-in forwards;
+
+}
+
+#rad {
+    position: absolute;
+    mix-blend-mode: multiply;
+    opacity: 0;
+    top: calc(50vh - 10vw);
+    left: 40vw;
+    width: 20vw;
+    height: 20vw;
+    background-image: url('pack.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    transform: scale(0.8);
+    transition: transform 1s ease;
+}
+
+.the-light {
+    /* mix-blend-mode: multiply; */
+    /*animation: ch 2s ease forwards;*/
+    --p: 0%;
+    --d: 0%;
+    --t: 0;
+    transform: scale(0.1) translateY(calc(var(--t) * 50vh));
+    width: 100vh;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: calc(50vw - 50vh);
+    background: radial-gradient(circle at 50%, white var(--d), transparent var(--p), rgba(255, 255, 255, 0));
+    transform-origin: center;
+}
+
+#move-button{
+    overflow: visible; background: none; position: fixed; bottom: 10vw; left: calc(50vw - var(--r)/2); --r: 20vw; width: var(--r); height: var(--r);
+}
